@@ -1,21 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.logo {
-  /* Establece una duración y tipo de animación */
-  animation: girar 3s linear infinite;
+/* :root {
+  --primary-color: #21232D;
+  --secondary-color: #BA0909 ;
+  --font-family-primary: 'Lato', sans-serif;
+  --font-family-secondary: 'Montserrat', sans-serif;
+  --font-family-tertiary: 'Open Sans', sans-serif;
+  --font-family-quaternary: 'Poppins', sans-serif;
+  --font-family-quinary: 'Roboto', sans-serif;
+} */
+
+.padreFooter{
+  display: flex;
+  justify-content: space-around;
+  background-color: #20232D ;
+  color: white;
+
+}
+.logoFooter{
+  width: 300px;
+  height: 300px;
+}
+.logoFooter
+img {
+width: 285px;
+height: 270px;
+margin-top: 15px;
+border-radius: 7px;
+}
+.infoContacto {
+  margin-top: 50px;
+  font-size: 23px;
+  font-weight: 500;
+  text-align: center;
+}
+.informacionContacto {
+  font-weight: 100;
+  font-size: 20px;
+}
+.iconTexto {
+  display: inline-flex;
+  align-items: center; 
+  margin-right: 5px; 
+  margin-top: 20px;
 }
 
-@keyframes girar {
-
-  /* Define la animación de rotación */
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.socialMedia 
+ {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 45px;
 }
-
+.enlacesInternos {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px;
+  font-size: 20px;
+}
+.enlacesFooter 
+a{
+  display: flex;
+  margin-left: 15px;
+}
+.footerFinal{
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(218, 5, 33, 0.867);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 3px;
+}
