@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors:{
-        'rojo-rodar':'#BA0909'
+        'rojo-rodar':'#BA0909',
+        'azul-rodar':'#21232D'
       },
       fontFamily:{
         primary:['Josefin Sans'],
