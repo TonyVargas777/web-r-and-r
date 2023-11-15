@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Formulario = () => {
+const Formulario = () => {
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
@@ -40,7 +40,7 @@ export const Formulario = () => {
   return (
     <div className=" flex flex-col bg-azul-rodar text-white font-bold py-2 px-4 rounded-3xl mt-2 border-white border-double">
       <h1 className="mt-10 bg-rojo-rodar rounded-3xl w-80%">Contacto:</h1>
-      <form className="" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="pb-10 pr-10 pl-10 flex flex-col">
           <label className="p-10 underline" htmlFor="nombre">
             Nombre:
@@ -83,3 +83,4 @@ export const Formulario = () => {
     </div>
   );
 };
+export default Formulario;

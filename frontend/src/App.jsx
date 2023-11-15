@@ -1,4 +1,4 @@
-import { Formulario } from './components/Formulario';
+import { Footer, Formulario } from './components';
 
 function App() {
   
@@ -14,7 +14,7 @@ function App() {
         </div>
 
         <Formulario/>
-
+        <Footer/>
        
 
 
