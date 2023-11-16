@@ -9,8 +9,13 @@ export default {
   theme: {
     extend: {
       colors:{
+<<<<<<< HEAD
         primary: 'var(--primary-color)',
         secondary: 'var(--secondary-color)',
+=======
+        'rojo-rodar':'#BA0909',
+        'azul-rodar':'#21232D'
+>>>>>>> formulario_contacto_tony
       },
       fontFamily:{
         primary: ['var(--font-family-primary)'],

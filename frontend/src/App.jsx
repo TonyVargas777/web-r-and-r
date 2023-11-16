@@ -1,13 +1,24 @@
-import Footer from './components/Footer';
-import './index.css';
+import { Footer, Formulario } from './components';
 
 function App() {
-
-
+  
   return (
     <>
+      <div className='flex flex-col text-center h-screen items-center justify-center'>
 
-<Footer/>
+        <div className='flex'>
+
+          <a href="#" target="_blank">
+           
+          </a>
+        </div>
+
+        <Formulario/>
+        <Footer/>
+       
+
+
+      </div>
     </>
   )
 }
