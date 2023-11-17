@@ -1,4 +1,4 @@
-import { Footer, Formulario } from './components';
+import { Crear, Editar, Footer, Formulario } from './components';
 
 function App() {
   
@@ -12,9 +12,10 @@ function App() {
            
           </a>
         </div>
-
-        <Formulario/>
-        <Footer/>
+        {/* <Crear/> */}
+        <Editar/>
+        {/* <Formulario/> */}
+        {/* <Footer/> */}
        
 
 

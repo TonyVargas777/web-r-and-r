@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
+:root {
   --primary-color: #21232D;
   --secondary-color: #BA0909 ;
   --font-family-primary: 'Lato', sans-serif;
@@ -12,8 +12,10 @@
   --font-family-tertiary: 'Open Sans', sans-serif;
   --font-family-quaternary: 'Poppins', sans-serif;
   --font-family-quinary: 'Roboto', sans-serif;
-} */
-
+}
+html{
+  background-color: black;
+}
 .padreFooter{
   display: flex;
   justify-content: space-around;
