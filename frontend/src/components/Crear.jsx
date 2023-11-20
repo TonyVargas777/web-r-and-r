@@ -46,9 +46,10 @@ const Crear = () => {
       setResultado("error");
     }
   };
+
   return (
-    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white py-2 px-4 border-white border-double rounded-3xl mt-2 w-2/3 ">
-      <h1 className="mt-10 bg-rojo-rodar rounded-3xl w-1/3 border-2 border-white">Crear artículo:</h1>
+    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white rounded-3xl mt-2 mb-2 w-5/6 ">
+      <h1 className="mt-10 bg-rojo-rodar rounded-3xl w-96 border-2 border-white">Crear artículo:</h1>
       
       <h1 className="m-10 underline">Formulario para crear un artículo:</h1>
 
@@ -176,7 +177,7 @@ const Crear = () => {
         <input
           type="submit"
           value="Guardar"
-          className="m-10 bg-rojo-rodar rounded-xl border-2 border-white hover:bg-indigo-500 w-1/3 group-hover: transition duration-200 group-hover:duration-200 hover:text-black"
+          className="m-10 bg-rojo-rodar rounded-xl border-2 border-white hover:bg-indigo-500 w-52 group-hover: transition duration-200 group-hover:duration-200 hover:text-black"
         />
       </form>
     </div>

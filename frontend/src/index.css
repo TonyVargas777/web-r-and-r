@@ -12,15 +12,46 @@
   --font-family-tertiary: 'Open Sans', sans-serif;
   --font-family-quaternary: 'Poppins', sans-serif;
   --font-family-quinary: 'Roboto', sans-serif;
+  width: 100%;
 }
 html{
   background-color: black;
+  width: 100%;
+}
+.navbarPadre {
+  display: flex;
+  justify-content: space-around;
+  background-color: #20232D;
+  color: white;
+  width: 83%;
+}
+
+.logoRodayRodar  img {
+  width: 150px;
+  height: 150px;
+  margin-top: 15px;
+  border-radius: 7px;
+}
+
+.menu ul {
+  display: flex;
+  justify-content: space-around;
+  margin: 15, 20, 15, 20px;
+  align-self: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 500px;
+  padding: 3px;
+}
+.menu ul li {
+  padding: 15px;
 }
 .padreFooter{
   display: flex;
   justify-content: space-around;
   background-color: #20232D ;
   color: white;
+  width: 83%;
 
 }
 .logoFooter{

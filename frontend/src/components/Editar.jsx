@@ -63,10 +63,10 @@ const Editar = () => {
       }
     }
   };
-
+  
   return (
-    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white py-2 px-4 border-white border-double rounded-3xl mt-2 w-2/3 ">
-      <h1 className="mt-10 bg-rojo-rodar rounded-3xl border-2 border-white w-1/3">
+    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white py-2 px-4 border-white border-double rounded-3xl mt-2 w-5/6 ">
+      <h1 className="mt-10 bg-rojo-rodar rounded-3xl border-2 border-white w-96">
         Editar artículo:
       </h1>
       <p className="m-10 underline">
@@ -95,19 +95,13 @@ const Editar = () => {
 
         <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
           <label htmlFor="url_poster">Poster:</label>
-          <div className="">
-            {articulo.url_poster != "default.png" && (
-              <img src={Global.url + "imagen/" + articulo.url_poster} />
-            )}
-            {articulo.url_poster == "default.png" && (
-              <img src="https://res.cloudinary.com/dvoh9w1ro/image/upload/v1699034795/Logo_Rojo_-_Fondo_Negro_w4qob3.jpg" />
-            )}
-          </div>
+          <img src={Global.url + "imagen/" + articulo.url_poster} />
           <input
             className="text-black rounded text-center"
             type="text"
             name="url_poster"
-            id="url_poster"
+            onChange={cambiado}
+            defaultValue={articulo.url_poster}
           />
         </div>
         <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
@@ -213,7 +207,7 @@ const Editar = () => {
         <input
           type="submit"
           value="Guardar"
-          className="m-10 bg-rojo-rodar rounded-xl border-2 border-white hover:bg-indigo-500 w-1/3 group-hover: transition duration-200 group-hover:duration-200 hover:text-black"
+          className="m-10 bg-rojo-rodar rounded-xl border-2 border-white hover:bg-indigo-500 w-52 group-hover: transition duration-200 group-hover:duration-200 hover:text-black"
         />
       </form>
     </div>

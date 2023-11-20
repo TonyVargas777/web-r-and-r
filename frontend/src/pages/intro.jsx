@@ -1,9 +1,12 @@
 import React from 'react'
+import { Layout } from '../components'
 
 const intro = () => {
-  return (
+  <Layout>
+    return (
     <div>intro</div>
   )
+  </Layout>
 }
 
-export default intro
+export default intro;
