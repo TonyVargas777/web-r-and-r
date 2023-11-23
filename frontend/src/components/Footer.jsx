@@ -19,7 +19,8 @@ const Footer = () => {
 <div className='padreFooter'>
 
 <div className='logoFooter'>
-  <img src='https://res.cloudinary.com/dvoh9w1ro/image/upload/v1699034797/Logo_Oficial_-_Logo_Rojo_-_Fondo_Blanco_mn7lvf.jpg'/>
+  <img src='https://res.cloudinary.com/dvoh9w1ro/image/upload/v1700498465/Logo_Blanco_-_Fondo_Negro_je92ff-removebg-preview_sxvfqn.png'/>
+  
 </div>
 
 <div className='infoContacto'>

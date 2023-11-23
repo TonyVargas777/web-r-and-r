@@ -1,6 +1,7 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import {Footer,Crear, Navbar} from "../components";
+import {Footer, Formulario, Navbar, Editar} from "../components";
+
 
 
 const GlobalStyle = createGlobalStyle`
@@ -14,15 +15,20 @@ const GlobalStyle = createGlobalStyle`
     var(--font-family-quinary);
 `
 ;
-
+const handleAddFilm = (newFilm) => {
+  // Lógica para agregar la nueva película
+  console.log("Nueva película añadida:", newFilm);
+};
 const Layout = ({ children }) => {
   return (
     <>
-      {/* <GlobalStyle /> */}
-      <Navbar/>
-      <Crear/>
-      <Footer />
-      {children}      
+      <GlobalStyle />
+      <Navbar/>  
+      {/* <Crear/> */} 
+      <Formulario onAddFilm={handleAddFilm}/>
+      {/* <Editar/>  */}  
+      {/* {children} */}
+      <Footer />     
     </>
   );
 };

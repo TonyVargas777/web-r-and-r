@@ -1,4 +1,278 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
+function Editar({ filmData, onUpdateFilm, onDeleteFilm }) {
+  const [tipo, setTipo] = useState(filmData.tipo || "");
+  const [titulo, setTitulo] = useState(filmData.titulo || "");
+  const [tituloEn, setTituloEn] = useState(filmData.tituloEn || "");
+  const [tituloCat, setTituloCat] = useState(filmData.tituloCat || "");
+  const [urlPoster, setUrlPoster] = useState(filmData.urlPoster || "");
+  const [sinopsis, setSinopsis] = useState(filmData.sinopsis || "");
+  const [sinopsisEn, setSinopsisEn] = useState(filmData.sinopsisEn || "");
+  const [sinopsisCat, setSinopsisCat] = useState(filmData.sinopsisCat || "");
+  const [linkImdb, setLinkImdb] = useState(filmData.linkImdb || "");
+  const [urlMakingOf, setUrlMakingOf] = useState(filmData.urlMakingOf || "");
+  const [urlYoutube, setUrlYoutube] = useState(filmData.urlYoutube || "");
+  const [plataformas, setPlataformas] = useState(filmData.plataformas || "");
+  const [fecha, setFecha] = useState(filmData.fecha || "");
+  const [duracion, setDuracion] = useState(filmData.duracion || "");
+  const [genero, setGenero] = useState(filmData.genero || "");
+  const [generoEn, setGeneroEn] = useState(filmData.generoEn || "");
+  const [generoCat, setGeneroCat] = useState(filmData.generoCat || "");
+  const [director, setDirector] = useState(filmData.director || "");
+  const [guionistas, setGuionistas] = useState(filmData.guionistas || "");
+  const [reparto, setReparto] = useState(filmData.reparto || "");
+
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    const updatedFilm = {
+      tipo,
+      titulo,
+      tituloEn,
+      tituloCat,
+      urlPoster,
+      sinopsis,
+      sinopsisEn,
+      sinopsisCat,
+      linkImdb,
+      urlMakingOf,
+      urlYoutube,
+      plataformas,
+      fecha,
+      duracion,
+      genero,
+      generoEn,
+      generoCat,
+      director,
+      guionistas,
+      reparto,
+    };
+
+    axios
+      .put(
+        `http://localhost:3001/api/editarFilmografia/${filmData._id}`,
+        updatedFilm
+      )
+      .then((response) => {
+        console.log(response.data);
+        onUpdateFilm(response.data); // Send the updated film data to the parent component
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:3001/api/eliminarFilmografia/${filmData._id}`)
+      .then(() => {
+        onDeleteFilm(filmData._id); // Send the film ID to the parent component for deletion
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  return (
+    <div>
+      <h2>Editar Película:</h2>
+
+      {urlPoster && (
+        <img src={urlPoster} alt="Film Poster" style={{ maxWidth: "300px" }} />
+      )}
+
+      <form onSubmit={handleUpdate} className="max-w-lg mx-auto mt-8">
+        <label>
+          Tipo:
+          <select
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+            className="mx-8"
+          >
+            <option value="" className="max-w-lg mx-auto mt-8">
+              Selecciona un tipo:
+            </option>
+            <option value="pelicula">Pelicula</option>
+            <option value="serie">Serie</option>
+            <option value="documental">Documental</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Título:
+          <input
+            type="text"
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+            defaultValue={titulo}
+          />
+          <input
+            type="text"
+            value={tituloEn}
+            onChange={(e) => setTituloEn(e.target.value)}
+            defaultValue={tituloEn}
+          />
+          <input
+            type="text"
+            value={tituloCat}
+            onChange={(e) => setTituloCat(e.target.value)}
+            defaultValue={tituloCat}
+          />
+        </label>
+        <br />
+        <label>
+          URL del póster:
+          <input
+            type="text"
+            value={urlPoster}
+            onChange={(e) => setUrlPoster(e.target.value)}
+            defaultValue={urlPoster}
+          />
+        </label>
+        <br />
+        <label>
+          Sinopsis:
+          <textarea
+            value={sinopsis}
+            onChange={(e) => setSinopsis(e.target.value)}
+            defaultValue={sinopsis}
+          />
+          <textarea
+            value={sinopsisEn}
+            onChange={(e) => setSinopsisEn(e.target.value)}
+            defaultValue={sinopsisEn}
+          />
+          <textarea
+            value={sinopsisCat}
+            onChange={(e) => setSinopsisCat(e.target.value)}
+            defaultValue={sinopsisCat}
+          />
+        </label>
+        <br />
+        <label>
+          Link de IMDb:
+          <input
+            type="text"
+            value={linkImdb}
+            onChange={(e) => setLinkImdb(e.target.value)}
+            defaultValue={linkImdb}
+          />
+        </label>
+        <br />
+        <label>
+          URL del Making-Of:
+          <input
+            type="text"
+            value={urlMakingOf}
+            onChange={(e) => setUrlMakingOf(e.target.value)}
+            defaultValue={urlMakingOf}
+          />
+        </label>
+        <br />
+        <label>
+          URL de YouTube:
+          <input
+            type="text"
+            value={urlYoutube}
+            onChange={(e) => setUrlYoutube(e.target.value)}
+            defaultValue={urlYoutube}
+          />
+        </label>
+        <br />
+        <label>
+          Plataformas:
+          <input
+            type="text"
+            value={plataformas}
+            onChange={(e) => setPlataformas(e.target.value)}
+            defaultValue={plataformas}
+          />
+        </label>
+        <br />
+        <label>
+          Fecha:
+          <input
+            type="number"
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
+            defaultValue={fecha}
+          />
+        </label>
+        <br />
+        <label>
+          Duración:
+          <input
+            type="number"
+            value={duracion}
+            onChange={(e) => setDuracion(e.target.value)}
+            defaultValue={duracion}
+          />
+        </label>
+        <br />
+        <label>
+          Género:
+          <input
+            type="text"
+            value={genero}
+            onChange={(e) => setGenero(e.target.value)}
+            defaultValue={genero}
+          />
+          <input
+            type="text"
+            value={generoEn}
+            onChange={(e) => setGeneroEn(e.target.value)}
+            defaultValue={generoEn}
+          />
+          <input
+            type="text"
+            value={generoCat}
+            onChange={(e) => setGeneroCat(e.target.value)}
+            defaultValue={generoCat}
+          />
+        </label>
+        <br />
+        <label>
+          Dirección:
+          <input
+            type="text"
+            value={director}
+            onChange={(e) => setDirector(e.target.value)}
+            defaultValue={director}
+          />
+        </label>        
+        <br />
+        <label>
+          Guión:
+          <input
+            type="text"
+            value={guionistas}
+            onChange={(e) => setGuionistas(e.target.value)}
+            defaultValue={guionistas}
+          />
+        </label>
+        <br />
+        <label>
+          Reparto:
+          <input
+            type="text"
+            value={reparto}
+            onChange={(e) => setReparto(e.target.value)}
+            defaultValue={reparto}
+          />
+        </label>
+
+        <button type="submit">Actualizar</button>
+      </form>
+      <br />
+
+      <button onClick={handleDelete}>BORRAR FICHA</button>
+    </div>
+  );
+}
+
+export default Editar;
+
+/* import React, { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "../hooks/useForm";
 import { useParams } from "react-router-dom";
@@ -65,7 +339,7 @@ const Editar = () => {
   };
   
   return (
-    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white py-2 px-4 border-white border-double rounded-3xl mt-2 w-5/6 ">
+    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white py-2 px-4 rounded-3xl mt-2 mb-2 w-5/6 ">
       <h1 className="mt-10 bg-rojo-rodar rounded-3xl border-2 border-white w-96">
         Editar artículo:
       </h1>
@@ -213,4 +487,4 @@ const Editar = () => {
     </div>
   );
 };
-export default Editar;
+export default Editar; */

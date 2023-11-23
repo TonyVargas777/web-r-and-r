@@ -6,14 +6,15 @@ const Navbar = () => {
     <header className="navbarPadre">
       <span className="logoRodayRodar">
         <a href="/home" rel="noopener noreferrer">
-          <img src='https://res.cloudinary.com/dvoh9w1ro/image/upload/v1699034797/Logo_Oficial_-_Logo_Rojo_-_Fondo_Blanco_mn7lvf.jpg'/>
-        </a>
+          <img src='https://res.cloudinary.com/dvoh9w1ro/image/upload/v1700498465/Logo_Blanco_-_Fondo_Negro_je92ff-removebg-preview_sxvfqn.png'/>
+          
+       </a>
       </span>
       <nav className="menu">
         <ul>
           <li><a href="/home">INICIO</a></li>
-          <li><a href="/Quienes Somos">QUIENES SOMOS</a></li>
-          <li><a href="Filmografia"> FILMOGRAFIA</a></li>
+          <li><a href="/about">QUIENES SOMOS</a></li>
+          <li><a href="/filmografia">FILMOGRAFIA</a></li>
         </ul>
       </nav>
     </header>

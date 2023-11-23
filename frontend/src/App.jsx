@@ -1,6 +1,6 @@
-import { Layout, Crear, Editar, Footer, Formulario } from '../src/components'
-/* import { intro } from './pages/intro' */
-/* import { filmografia } from './pages/filmografia' */
+import { Layout, Editar, Footer, Formulario } from '../src/components'
+import { intro } from './pages'
+import { filmografia } from './pages'
 function App() {
   
   return (
@@ -11,7 +11,7 @@ function App() {
         {/* <Editar/> */}
         {/* <Formulario/> */}
         {/* <Footer/> */}
-        {/* <intro/> */}
+        {/* <Formulario onAddFilm={handleAddFilm} /> */}
         {/* <filmografia/> */}
       </div>
     </>
