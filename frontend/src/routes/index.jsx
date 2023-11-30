@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { Menu, ListadoPeliculas, CardPelicula, Editar, Navbar, Formulario, Footer } from "../components";
+import { Menu, ListadoPeliculas, Editar, Navbar, Formulario, Footer } from "../components";
 
 export const Rutas = () => {
   return (
@@ -12,8 +12,7 @@ export const Rutas = () => {
           <Route path="/menu" element={<Menu />} />
           <Route path="/formulario" element={<Formulario />} />          
           <Route path="/listadoPeliculas" element={<ListadoPeliculas />} />
-          <Route path="/editar/:id" element={<Editar />} />          
-          <Route path="/cardPelicula" element={<CardPelicula />} />
+          <Route path="/editar/:id" element={<Editar />} />
 
           <Route path="/*" element={
             <div className="">

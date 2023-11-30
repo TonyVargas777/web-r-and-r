@@ -32,7 +32,7 @@ function Editar({ onUpdateFilm, onDeleteFilm }) {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/obtenerFilm/${id}`);
+      const response = await axios.get(`http://localhost:3001/api/obtenerFilmografias/${id}`);
       setFilmData(response.data);
     } catch (error) {
       console.error(error);
@@ -75,7 +75,7 @@ const handleDelete = async () => {
         <img src={filmData.urlPoster} alt="Film Poster" style={{ maxWidth: "300px" }} />
       )}
 
-      <h1 className="m-10 underline">Formulario para crear un artículo:</h1>
+      <h1 className="m-10 underline">Formulario para EDITAR un artículo:</h1>
       <form
         onSubmit={handleUpdate}
         className="pb-10 pr-10 pl-10 flex flex-col place-items-center w-2/3"
@@ -100,21 +100,21 @@ const handleDelete = async () => {
           Título:
           <input
             type="text"
-            value={filmData.titulo}
+            /* value={filmData.titulo} */
             onChange={(e) => setTitulo(e.target.value)}
             defaultValue={filmData.titulo}
             className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <input
             type="text"
-            value={filmData.tituloEn}
+            /* value={filmData.tituloEn} */
             onChange={(e) => setTituloEn(e.target.value)}
             defaultValue={filmData.tituloEn}
             className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <input
             type="text"
-            value={filmData.tituloCat}
+            /* value={filmData.tituloCat} */
             onChange={(e) => setTituloCat(e.target.value)}
             defaultValue={filmData.tituloCat}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -125,7 +125,7 @@ const handleDelete = async () => {
           URL del póster:
           <input
             type="text"
-            value={filmData.urlPoster}
+            /* value={filmData.urlPoster} */
             onChange={(e) => setUrlPoster(e.target.value)}
             defaultValue={filmData.urlPoster}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -135,19 +135,19 @@ const handleDelete = async () => {
         <label className="block font-big text-red-700 text-red-500 w-full">
           Sinopsis:
           <textarea
-            value={filmData.sinopsis}
+            /* value={filmData.sinopsis} */
             onChange={(e) => setSinopsis(e.target.value)}
             defaultValue={filmData.sinopsis}
             className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <textarea
-            value={filmData.sinopsisEn}
+            /* value={filmData.sinopsisEn} */
             onChange={(e) => setSinopsisEn(e.target.value)}
             defaultValue={filmData.sinopsisEn}
             className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <textarea
-            value={filmData.sinopsisCat}
+            /* value={filmData.sinopsisCat} */
             onChange={(e) => setSinopsisCat(e.target.value)}
             defaultValue={filmData.sinopsisCat}
             className="bg-red-50 border border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -158,7 +158,7 @@ const handleDelete = async () => {
           Link de IMDb:
           <input
             type="text"
-            value={filmData.linkImdb}
+            /* value={filmData.linkImdb} */
             onChange={(e) => setLinkImdb(e.target.value)}
             defaultValue={filmData.linkImdb}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -169,7 +169,7 @@ const handleDelete = async () => {
           URL del Making-Of:
           <input
             type="text"
-            value={filmData.urlMakingOf}
+            /* value={filmData.urlMakingOf} */
             onChange={(e) => setUrlMakingOf(e.target.value)}
             defaultValue={filmData.urlMakingOf}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -180,7 +180,7 @@ const handleDelete = async () => {
           URL de YouTube:
           <input
             type="text"
-            value={filmData.urlYoutube}
+            /* value={filmData.urlYoutube} */
             onChange={(e) => setUrlYoutube(e.target.value)}
             defaultValue={filmData.urlYoutube}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -191,7 +191,7 @@ const handleDelete = async () => {
           Plataformas:
           <input
             type="text"
-            value={filmData.plataformas}
+            /* value={filmData.plataformas} */
             onChange={(e) => setPlataformas(e.target.value)}
             defaultValue={filmData.plataformas}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -202,7 +202,7 @@ const handleDelete = async () => {
           Fecha:
           <input
             type="number"
-            value={filmData.fecha}
+            /* value={filmData.fecha} */
             onChange={(e) => setFecha(e.target.value)}
             defaultValue={filmData.fecha}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -213,7 +213,7 @@ const handleDelete = async () => {
           Duración:
           <input
             type="number"
-            value={filmData.duracion}
+            /* value={filmData.duracion} */
             onChange={(e) => setDuracion(e.target.value)}
             defaultValue={filmData.duracion}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -224,21 +224,21 @@ const handleDelete = async () => {
           Género:
           <input
             type="text"
-            value={filmData.genero}
+            /* value={filmData.genero} */
             onChange={(e) => setGenero(e.target.value)}
             defaultValue={filmData.genero}
             className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <input
             type="text"
-            value={filmData.generoEn}
+            /* value={filmData.generoEn} */
             onChange={(e) => setGeneroEn(e.target.value)}
             defaultValue={filmData.generoEn}
             className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <input
             type="text"
-            value={filmData.generoCat}
+            /* value={filmData.generoCat} */
             onChange={(e) => setGeneroCat(e.target.value)}
             defaultValue={filmData.generoCat}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -249,7 +249,7 @@ const handleDelete = async () => {
           Dirección:
           <input
             type="text"
-            value={filmData.director}
+            /* value={filmData.director} */
             onChange={(e) => setDirector(e.target.value)}
             defaultValue={filmData.director}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -260,7 +260,7 @@ const handleDelete = async () => {
           Guión:
           <input
             type="text"
-            value={filmData.guionistas}
+            /* value={filmData.guionistas} */
             onChange={(e) => setGuionistas(e.target.value)}
             defaultValue={filmData.guionistas}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -271,7 +271,7 @@ const handleDelete = async () => {
           Reparto:
           <input
             type="text"
-            value={filmData.reparto}
+            /* value={filmData.reparto} */
             onChange={(e) => setReparto(e.target.value)}
             defaultValue={filmData.reparto}
             className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
