@@ -1,5 +1,5 @@
 // ESTRUCTURA MONGO ATLAS
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 const filmografiaSchema = Schema({
     tipo:{
@@ -85,9 +85,7 @@ const filmografiaSchema = Schema({
     }
 });
 
-/* export default filmografiaSchema;
-module.exports = model(filmografiaSchema, "filmografia"); */  
 const Filmografia = model("Filmografia", filmografiaSchema);
-module.exports = Filmografia;
+export default Filmografia;
 
 

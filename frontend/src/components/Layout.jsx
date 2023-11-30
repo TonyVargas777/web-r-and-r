@@ -1,8 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
-import {Footer, Formulario, Navbar, Editar} from "../components";
-
-
+import {Footer, Formulario, Navbar, Editar, Menu, ListadoPeliculas, CardPelicula} from "../components";
 
 const GlobalStyle = createGlobalStyle`
   background-color: var(--primary-color);
@@ -22,13 +20,18 @@ const handleAddFilm = (newFilm) => {
 const Layout = ({ children }) => {
   return (
     <>
-      <GlobalStyle />
-      <Navbar/>  
+      {<GlobalStyle />}
+      {/* <Navbar/> */}  
       {/* <Crear/> */} 
-      <Formulario onAddFilm={handleAddFilm}/>
-      {/* <Editar/>  */}  
+      {/* <Menu onAddFilm={handleAddFilm}/> */}
+      <Formulario/>
+      {/* {<Editar/>} */} 
+      {/* {<Menu/>} */} 
+      {/* {<ListadoPeliculas/>} */} 
+      {/* </CardPelicula/> */}
+      {/* <Lista/> */}
       {/* {children} */}
-      <Footer />     
+      {/* <Footer /> */}     
     </>
   );
 };

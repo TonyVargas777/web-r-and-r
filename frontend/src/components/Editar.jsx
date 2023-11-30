@@ -1,93 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-function Editar({ filmData, onUpdateFilm, onDeleteFilm }) {
-  const [tipo, setTipo] = useState(filmData.tipo || "");
-  const [titulo, setTitulo] = useState(filmData.titulo || "");
-  const [tituloEn, setTituloEn] = useState(filmData.tituloEn || "");
-  const [tituloCat, setTituloCat] = useState(filmData.tituloCat || "");
-  const [urlPoster, setUrlPoster] = useState(filmData.urlPoster || "");
-  const [sinopsis, setSinopsis] = useState(filmData.sinopsis || "");
-  const [sinopsisEn, setSinopsisEn] = useState(filmData.sinopsisEn || "");
-  const [sinopsisCat, setSinopsisCat] = useState(filmData.sinopsisCat || "");
-  const [linkImdb, setLinkImdb] = useState(filmData.linkImdb || "");
-  const [urlMakingOf, setUrlMakingOf] = useState(filmData.urlMakingOf || "");
-  const [urlYoutube, setUrlYoutube] = useState(filmData.urlYoutube || "");
-  const [plataformas, setPlataformas] = useState(filmData.plataformas || "");
-  const [fecha, setFecha] = useState(filmData.fecha || "");
-  const [duracion, setDuracion] = useState(filmData.duracion || "");
-  const [genero, setGenero] = useState(filmData.genero || "");
-  const [generoEn, setGeneroEn] = useState(filmData.generoEn || "");
-  const [generoCat, setGeneroCat] = useState(filmData.generoCat || "");
-  const [director, setDirector] = useState(filmData.director || "");
-  const [guionistas, setGuionistas] = useState(filmData.guionistas || "");
-  const [reparto, setReparto] = useState(filmData.reparto || "");
+function Editar({ onUpdateFilm, onDeleteFilm }) {
+  const { id } = useParams();
 
-  const handleUpdate = (event) => {
-    event.preventDefault();
-    const updatedFilm = {
-      tipo,
-      titulo,
-      tituloEn,
-      tituloCat,
-      urlPoster,
-      sinopsis,
-      sinopsisEn,
-      sinopsisCat,
-      linkImdb,
-      urlMakingOf,
-      urlYoutube,
-      plataformas,
-      fecha,
-      duracion,
-      genero,
-      generoEn,
-      generoCat,
-      director,
-      guionistas,
-      reparto,
-    };
+  const [filmData, setFilmData] = useState({
+  _id: "",
+  tipo: "",
+  titulo: "",
+  tituloEn: "",
+  tituloCat: "",
+  urlPoster: "",
+  sinopsis: "",
+  sinopsisEn: "",
+  sinopsisCat: "",
+  linkImdb: "",
+  urlMakingOf: "",
+  urlYoutube: "",
+  plataformas: "",
+  fecha: "",
+  duracion: "",
+  genero: "",
+  generoEn: "",
+  generoCat: "",
+  director: "",
+  guionistas: "",
+  reparto: ""
+});
 
-    axios
-      .put(
-        `http://localhost:3001/api/editarFilmografia/${filmData._id}`,
-        updatedFilm
-      )
-      .then((response) => {
-        console.log(response.data);
-        onUpdateFilm(response.data); // Send the updated film data to the parent component
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/api/obtenerFilm/${id}`);
+      setFilmData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleDelete = () => {
-    axios
-      .delete(`http://localhost:3001/api/eliminarFilmografia/${filmData._id}`)
-      .then(() => {
-        onDeleteFilm(filmData._id); // Send the film ID to the parent component for deletion
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  fetchData();
+}, [id]);
+
+
+const handleUpdate = async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await axios.put(`http://localhost:3001/api/editarFilmografia/${filmData._id}`, filmData);
+    onUpdateFilm(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const handleDelete = async () => {
+  try {
+    await axios.delete(`http://localhost:3001/api/eliminarFilmografia/${filmData._id}`);
+    onDeleteFilm(filmData._id);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
 
   return (
-    <div>
-      <h2>Editar Película:</h2>
+    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white rounded-3xl mt-2  w-5/6">
+      <h2 className="mt-10 bg-rojo-rodar rounded-3xl w-96 border-2 border-white">
+        Editar Película:
+      </h2>
 
-      {urlPoster && (
-        <img src={urlPoster} alt="Film Poster" style={{ maxWidth: "300px" }} />
+      {filmData.urlPoster && (
+        <img src={filmData.urlPoster} alt="Film Poster" style={{ maxWidth: "300px" }} />
       )}
 
-      <form onSubmit={handleUpdate} className="max-w-lg mx-auto mt-8">
-        <label>
+      <h1 className="m-10 underline">Formulario para crear un artículo:</h1>
+      <form
+        onSubmit={handleUpdate}
+        className="pb-10 pr-10 pl-10 flex flex-col place-items-center w-2/3"
+      >
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Tipo:
           <select
-            value={tipo}
+            value={filmData.tipo}
             onChange={(e) => setTipo(e.target.value)}
-            className="mx-8"
+            className="bg-red-50 border border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           >
             <option value="" className="max-w-lg mx-auto mt-8">
               Selecciona un tipo:
@@ -98,393 +96,205 @@ function Editar({ filmData, onUpdateFilm, onDeleteFilm }) {
           </select>
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Título:
           <input
             type="text"
-            value={titulo}
+            value={filmData.titulo}
             onChange={(e) => setTitulo(e.target.value)}
-            defaultValue={titulo}
+            defaultValue={filmData.titulo}
+            className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <input
             type="text"
-            value={tituloEn}
+            value={filmData.tituloEn}
             onChange={(e) => setTituloEn(e.target.value)}
-            defaultValue={tituloEn}
+            defaultValue={filmData.tituloEn}
+            className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <input
             type="text"
-            value={tituloCat}
+            value={filmData.tituloCat}
             onChange={(e) => setTituloCat(e.target.value)}
-            defaultValue={tituloCat}
+            defaultValue={filmData.tituloCat}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           URL del póster:
           <input
             type="text"
-            value={urlPoster}
+            value={filmData.urlPoster}
             onChange={(e) => setUrlPoster(e.target.value)}
-            defaultValue={urlPoster}
+            defaultValue={filmData.urlPoster}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Sinopsis:
           <textarea
-            value={sinopsis}
+            value={filmData.sinopsis}
             onChange={(e) => setSinopsis(e.target.value)}
-            defaultValue={sinopsis}
+            defaultValue={filmData.sinopsis}
+            className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <textarea
-            value={sinopsisEn}
+            value={filmData.sinopsisEn}
             onChange={(e) => setSinopsisEn(e.target.value)}
-            defaultValue={sinopsisEn}
+            defaultValue={filmData.sinopsisEn}
+            className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <textarea
-            value={sinopsisCat}
+            value={filmData.sinopsisCat}
             onChange={(e) => setSinopsisCat(e.target.value)}
-            defaultValue={sinopsisCat}
+            defaultValue={filmData.sinopsisCat}
+            className="bg-red-50 border border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Link de IMDb:
           <input
             type="text"
-            value={linkImdb}
+            value={filmData.linkImdb}
             onChange={(e) => setLinkImdb(e.target.value)}
-            defaultValue={linkImdb}
+            defaultValue={filmData.linkImdb}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           URL del Making-Of:
           <input
             type="text"
-            value={urlMakingOf}
+            value={filmData.urlMakingOf}
             onChange={(e) => setUrlMakingOf(e.target.value)}
-            defaultValue={urlMakingOf}
+            defaultValue={filmData.urlMakingOf}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           URL de YouTube:
           <input
             type="text"
-            value={urlYoutube}
+            value={filmData.urlYoutube}
             onChange={(e) => setUrlYoutube(e.target.value)}
-            defaultValue={urlYoutube}
+            defaultValue={filmData.urlYoutube}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Plataformas:
           <input
             type="text"
-            value={plataformas}
+            value={filmData.plataformas}
             onChange={(e) => setPlataformas(e.target.value)}
-            defaultValue={plataformas}
+            defaultValue={filmData.plataformas}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Fecha:
           <input
             type="number"
-            value={fecha}
+            value={filmData.fecha}
             onChange={(e) => setFecha(e.target.value)}
-            defaultValue={fecha}
+            defaultValue={filmData.fecha}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Duración:
           <input
             type="number"
-            value={duracion}
+            value={filmData.duracion}
             onChange={(e) => setDuracion(e.target.value)}
-            defaultValue={duracion}
+            defaultValue={filmData.duracion}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Género:
           <input
             type="text"
-            value={genero}
+            value={filmData.genero}
             onChange={(e) => setGenero(e.target.value)}
-            defaultValue={genero}
+            defaultValue={filmData.genero}
+            className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <input
             type="text"
-            value={generoEn}
+            value={filmData.generoEn}
             onChange={(e) => setGeneroEn(e.target.value)}
-            defaultValue={generoEn}
+            defaultValue={filmData.generoEn}
+            className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
           <input
             type="text"
-            value={generoCat}
+            value={filmData.generoCat}
             onChange={(e) => setGeneroCat(e.target.value)}
-            defaultValue={generoCat}
+            defaultValue={filmData.generoCat}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Dirección:
           <input
             type="text"
-            value={director}
+            value={filmData.director}
             onChange={(e) => setDirector(e.target.value)}
-            defaultValue={director}
+            defaultValue={filmData.director}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
-        </label>        
+        </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Guión:
           <input
             type="text"
-            value={guionistas}
+            value={filmData.guionistas}
             onChange={(e) => setGuionistas(e.target.value)}
-            defaultValue={guionistas}
+            defaultValue={filmData.guionistas}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
         <br />
-        <label>
+        <label className="block font-big text-red-700 text-red-500 w-full">
           Reparto:
           <input
             type="text"
-            value={reparto}
+            value={filmData.reparto}
             onChange={(e) => setReparto(e.target.value)}
-            defaultValue={reparto}
+            defaultValue={filmData.reparto}
+            className="bg-red-50 border  border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
           />
         </label>
 
-        <button type="submit">Actualizar</button>
+        <button
+          className="m-10 bg-rojo-rodar rounded-xl border-2 border-white hover:bg-indigo-500 w-52 group-hover: transition ease-in duration-200 hover:text-black"
+          type="submit"
+        >
+          ACTUALIZAR
+        </button>
       </form>
       <br />
 
-      <button onClick={handleDelete}>BORRAR FICHA</button>
+      <button
+        className="m-05 bg-rojo-rodar rounded-xl border-2 border-white hover:bg-indigo-500 w-52 group-hover: transition ease-in duration-200 hover:text-black"
+        onClick={handleDelete}
+      >
+        BORRAR FICHA
+      </button>
     </div>
   );
 }
 
 export default Editar;
-
-/* import React, { useEffect } from "react";
-import { useState } from "react";
-import { useForm } from "../hooks/useForm";
-import { useParams } from "react-router-dom";
-import { Peticion } from "../helpers/Peticion";
-import { Global } from "../helpers/Global";
-
-const Editar = () => {
-  const { formulario, enviado, cambiado } = useForm({});
-  const [resultado, setResultado] = useState("no_enviado");
-  const [articulo, setArticulo] = useState({});
-  const params = useParams();
-
-  useEffect(() => {
-    conseguirArticulo();
-  }, [params._id]);
-
-  const conseguirArticulo = async () => {
-    const { datos } = await Peticion(
-      Global.url + "articulo/" + params.id,
-      "GET"
-    );
-    if (datos.status === "success") {
-      setArticulo(datos.articulo);
-    }
-  };
-
-  const editarArticulo = async (e) => {
-    e.preventDefault();
-    let nuevoArticulo = formulario;
-
-    const { datos } = await Peticion(
-      Global.url + "articulo/" + params.id,
-      "PUT",
-      nuevoArticulo
-    );
-
-    if (datos.status === "success") {
-      setResultado("guardado");
-    } else {
-      setResultado("error");
-    }
-
-    const fileInput = document.querySelector("#file");
-
-    if (datos.status === "success" && fileInput[0]) {
-      setResultado("guardado");
-
-      const formData = new FormData();
-      formData.append("file0", fileInput[0]);
-
-      const subida = await Peticion(
-        Global.url + "subir-imagen/" + datos.articulo,
-        "POST",
-        formData,
-        true
-      );
-      console.log(datos.articulo);
-      if (subida.datos.status === "success") {
-        setResultado("guardado");
-      } else {
-        setResultado("error");
-      }
-    }
-  };
-  
-  return (
-    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white py-2 px-4 rounded-3xl mt-2 mb-2 w-5/6 ">
-      <h1 className="mt-10 bg-rojo-rodar rounded-3xl border-2 border-white w-96">
-        Editar artículo:
-      </h1>
-      <p className="m-10 underline">
-        Formulario para editar el artículo: {articulo.titulo}
-      </p>
-
-      <strong>
-        {resultado == "guardado" ? "Artículo guardado con éxito" : ""}
-      </strong>
-      <strong>{resultado == "error" ? "Los datos son incorrectos" : ""}</strong>
-
-      <form
-        className="pb-10 pr-10 pl-10 flex flex-col place-items-center w-2/3"
-        onSubmit={editarArticulo}
-      >
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="titulo">Título:</label>
-          <input
-            className="text-black rounded text-center"
-            type="text"
-            name="titulo"
-            onChange={cambiado}
-            defaultValue={articulo.titulo}
-          />
-        </div>
-
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="url_poster">Poster:</label>
-          <img src={Global.url + "imagen/" + articulo.url_poster} />
-          <input
-            className="text-black rounded text-center"
-            type="text"
-            name="url_poster"
-            onChange={cambiado}
-            defaultValue={articulo.url_poster}
-          />
-        </div>
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="sinopsis">Sinopsis:</label>
-          <textarea
-            className="text-black rounded text-center"
-            type="text"
-            name="sinopsis"
-            onChange={cambiado}
-            defaultValue={articulo.sinopsis}
-          />
-        </div>
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="link_imdb">Link IMDB:</label>
-          <input
-            className="text-black rounded text-center"
-            type="url"
-            name="link_imdb"
-            onChange={cambiado}
-            defaultValue={articulo.link_imdb}
-          />
-        </div>
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="url_makingof">URL Making Of:</label>
-          <input
-            className="text-black rounded text-center"
-            type="url"
-            name="url_makingof"
-            onChange={cambiado}
-            defaultValue={articulo.url_makingof}
-          />
-        </div>      
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="url_youtube">URL Youtube:</label>
-          <input
-            className="text-black rounded text-center"
-            type="url"            name="url_youtube"
-            onChange={cambiado}
-            defaultValue={articulo.url_youtube}
-          />
-        </div>
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="plataformas">Plataformas:</label>
-          <input
-            className="text-black rounded text-center"
-            type="text"
-            name="plataformas"
-            onChange={cambiado}
-            defaultValue={articulo.plataformas}
-          />
-        </div>      
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="fecha">Fecha:</label>
-          <input
-            className="text-black rounded text-center"
-            type="number"
-            name="fecha"
-            onChange={cambiado}
-            defaultValue={articulo.fecha}
-          />
-        </div>
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="duracion">Duración:</label>
-          <input
-            className="text-black rounded text-center"
-            type="number"
-            name="duracion"
-            onChange={cambiado}
-            defaultValue={articulo.duracion}
-          />
-        </div>
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="genero">Género:</label>
-          <input
-            className="text-black rounded text-center"
-            type="text"
-            name="genero"
-            onChange={cambiado}
-            defaultValue={articulo.genero}
-          />
-        </div>
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="reparto">Reparto:</label>
-          <input
-            className="text-black rounded text-center"
-            type="text"
-            name="reparto"
-            onChange={cambiado}
-            defaultValue={articulo.reparto}
-          />
-        </div>
-        <div className="pb-10 pr-10 pl-10 flex flex-col w-full">
-          <label htmlFor="equipo_tecnico">Equipo Técnico:</label>
-          <input
-            className="text-black rounded text-center"
-            type="text"
-            name="equipo_tecnico"
-            onChange={cambiado}
-            defaultValue={articulo.equipo_tecnico}
-          />
-        </div>
-
-        <input
-          type="submit"
-          value="Guardar"
-          className="m-10 bg-rojo-rodar rounded-xl border-2 border-white hover:bg-indigo-500 w-52 group-hover: transition duration-200 group-hover:duration-200 hover:text-black"
-        />
-      </form>
-    </div>
-  );
-};
-export default Editar; */
