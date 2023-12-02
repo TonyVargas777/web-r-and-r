@@ -3,7 +3,7 @@ function App() {
   
   return (
     
-      <div className='flex flex-col text-center h-screen items-center justify-center'>
+      <div className='flex flex-col text-center h-full  w-full items-center justify-center'>
 
         <Rutas/>
 

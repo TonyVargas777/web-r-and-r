@@ -13,8 +13,8 @@ const CardPelicula = ({ pelicula }) => {
 
   return (
     <div className="w-5/6 m-6 border rounded-l">
-       <Link to={`/editar/${_id}`}>
-        <img src={pelicula.urlPoster} alt={pelicula.titulo} />
+       <Link to={`/editar/${pelicula._id}`}>
+        <img className='border w-full  ' src={pelicula.urlPoster} alt={pelicula.titulo} />
       
       <div className="info-pelicula">
         <h3>{titulo}</h3>  

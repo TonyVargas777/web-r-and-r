@@ -6,7 +6,7 @@ export const Rutas = () => {
   return (
     <BrowserRouter>
       <Navbar />
-      <section className='flex flex-col text-center h-screen items-center justify-center w-full'>
+      <section className='flex flex-col text-center h-auto min-h-screen items-center justify-center w-full'>
         <Routes>   
           <Route path="/" element={<Menu />} />       
           <Route path="/menu" element={<Menu />} />
@@ -15,7 +15,7 @@ export const Rutas = () => {
           <Route path="/editar/:id" element={<Editar />} />
 
           <Route path="/*" element={
-            <div className="">
+            <div className="flex flex-col text-center h-screen items-center justify-center w-full">
               <h1>Error 404</h1>
             </div>
           }/>

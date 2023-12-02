@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white rounded-3xl pt-10 pb-16 mt-2 mb-2 w-1/2">
+    <div className="flex flex-col border font-bold place-items-center bg-azul-rodar text-white rounded-3xl pt-10 pb-16 mt-2 mb-2 w-1/2">
       <h1 className="mt-10 bg-rojo-rodar rounded-3xl w-96 border-2 border-white">
         Menú de Edición
       </h1>

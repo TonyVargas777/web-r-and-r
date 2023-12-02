@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
       {/* <Navbar/> */}  
       {/* <Crear/> */} 
       {/* <Menu onAddFilm={handleAddFilm}/> */}
-      <Formulario/>
+      {/* <Formulario/> */}
       {/* {<Editar/>} */} 
       {/* {<Menu/>} */} 
       {/* {<ListadoPeliculas/>} */} 

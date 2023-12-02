@@ -130,15 +130,15 @@ function Formulario({ onAddFilm }) {
   };
 
   return (
-    <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white rounded-3xl mt-2 mb-2 w-5/6">
+    <div className="flex flex-col font-bold place-items-center bg-transparent text-white h-5/6 rounded-3xl mt-10 mb-10 w-5/6">
       {formSubmitted && (
         <div>
           <p className="mt-10 bg-rojo-rodar rounded-3xl w-96 border-2 border-white">
             ¡Formulario enviado con éxito!
           </p>
         </div>
-      )}  (
-        <div className="flex flex-col font-bold place-items-center bg-azul-rodar text-white rounded-3xl mt-2  w-5/6">
+      )}  
+        <div className="flex flex-col border font-bold place-items-center bg-azul-rodar text-white rounded-3xl mt-2  w-5/6">
           <h1 className="mt-10 bg-rojo-rodar rounded-3xl w-96 border-2 border-white">
             CREAR ARTÍCULO:
           </h1>
@@ -164,7 +164,7 @@ function Formulario({ onAddFilm }) {
               </select>
             </label>
             <br />
-            <label className="block   font-big text-red-700 text-red-500 w-full">
+            <label className="block font-big text-red-700 text-red-500 w-full">
               Título:
               <input
                 className="bg-red-50 border mb-2 border-red-500 w-full text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full dark:bg-red-100 dark:border-red-400 text-center"
@@ -354,7 +354,7 @@ function Formulario({ onAddFilm }) {
             </button>
           </form>
         </div>
-      )
+      
     </div>
   );
 }
